@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use pyteg, please cite the thesis that introduced the method, and the software if you use this implementation."
+title: "pyteg: textual entailment by generality with asymmetric InfoSimba"
+version: 0.1.0
+date-released: 2026-10-13
+license: MIT
+repository-code: "https://github.com/HULTIG/pyteg"
+authors:
+  - family-names: Pais
+    given-names: Sebastião
+    affiliation: "Universidade da Beira Interior; NOVA LINCS"
+keywords:
+  - textual entailment
+  - generality
+  - asymmetric similarity
+  - InfoSimba
+preferred-citation:
+  type: thesis
+  title: "Asymmetric Distributional Similarity Measures to Recognize Textual Entailment by Generality"
+  authors:
+    - family-names: Pais
+      given-names: Sebastião
+  year: 2013
+  thesis-type: "PhD thesis"
+  institution:
+    name: "École nationale supérieure des mines de Paris and Universidade da Beira Interior"
+  url: "https://pastel.hal.science/pastel-00962176"
+  identifiers:
+    - type: other
+      value: "NNT 2013ENMP0063"
