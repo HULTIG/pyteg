@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE entailment-corpus SYSTEM "rte.dtd">
+<entailment-corpus challenge="1">
+<pair id="754" value="TRUE" task="CD">
+	<t>Mexico City has a very bad pollution problem because the mountains around the city act as walls and block in dust and smog.</t>
+	<h>Poor air circulation out of the mountain-walled Mexico City aggravates pollution.</h>
+</pair>
+<pair id="10" value="FALSE" task="IR">
+	<t>Oracle had fought to keep the forms from being released.</t>
+	<h>Oracle released a confidential document.</h>
+</pair>
+</entailment-corpus>

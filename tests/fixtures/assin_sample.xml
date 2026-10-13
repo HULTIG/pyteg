@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<entailment-corpus>
+  <pair entailment="Entailment" id="1" similarity="4.5">
+    <t>Uma criança está a comer um morango no jardim.</t>
+    <h>Uma criança está a comer fruta.</h>
+  </pair>
+  <pair entailment="None" id="2" similarity="1.0">
+    <t>O homem está a tocar guitarra.</t>
+    <h>A mulher está a cozinhar.</h>
+  </pair>
+  <pair entailment="Paraphrase" id="3" similarity="5.0">
+    <t>O gato dorme.</t>
+    <h>O gato está a dormir.</h>
+  </pair>
+</entailment-corpus>

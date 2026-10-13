@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+
+# Data produced by the pipeline (downloaded or derived; never committed)
+data/
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store

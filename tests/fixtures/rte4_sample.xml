@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entailment-corpus>
+<pair id="1" entailment="ENTAILMENT" task="IE"><t>Spencer Dryden, the drummer of Jefferson Airplane, passed away on Tuesday. He was 66.</t><h>Spencer Dryden died at 66.</h></pair>
+<pair id="2" entailment="CONTRADICTION" task="IR"><t>Lower food prices pushed the UK's inflation rate down.</t><h>Food prices are on the increase.</h></pair>
+<pair id="3" entailment="UNKNOWN" task="QA"><t>Four people were killed when a tornado hit a camp.</t><h>Four boy scouts were killed by a tornado.</h></pair>
+</entailment-corpus>
