@@ -250,13 +250,23 @@ class CooccurrenceIndex:
         size: int = 50,
         min_df: int = 5,
         exclude: Iterable[str] = (),
+        weighting: str = "count",
     ) -> Dict[str, float]:
-        """The ``size`` words most associated with ``word``, weighted by PPMI.
+        """A distributional profile of ``word``: its ``size`` main context words.
 
-        Positive pointwise mutual information over documents,
-        ``log(n(w, c) * N / (n(w) * n(c)))``, keeping only positive values and
-        context words seen in at least ``min_df`` documents.
+        ``weighting`` decides both which context words are kept and their
+        weight:
+
+        * ``"count"`` (default): the words that co-occur most often with
+          ``word``, weighted by ``P(c | word) = n(word, c) / n(word)``.
+        * ``"ppmi"``: the words with the highest positive pointwise mutual
+          information, ``log(n(word, c) * N / (n(word) * n(c)))``.
+
+        Context words seen in fewer than ``min_df`` documents, the word itself
+        and anything in ``exclude`` (typically stop words) are left out.
         """
+        if weighting not in ("count", "ppmi"):
+            raise ValueError("weighting must be 'count' or 'ppmi'")
         i = self.word_id.get(word)
         if i is None:
             return {}
@@ -267,13 +277,16 @@ class CooccurrenceIndex:
             if j is not None:
                 counts[j] = 0.0
         valid = (counts > 0) & (self.df >= min_df)
-        pmi = np.full(len(self.vocab), -np.inf)
-        pmi[valid] = np.log(counts[valid] * self.n_docs / (self.df[i] * self.df[valid]))
-        candidates = np.flatnonzero(pmi > 0)
+        score = np.full(len(self.vocab), -np.inf)
+        if weighting == "count":
+            score[valid] = counts[valid] / self.df[i]
+        else:
+            score[valid] = np.log(counts[valid] * self.n_docs / (self.df[i] * self.df[valid]))
+        candidates = np.flatnonzero(score > 0)
         if len(candidates) == 0:
             return {}
-        top = candidates[np.argsort(-pmi[candidates], kind="stable")[:size]]
-        return {self.vocab[j]: float(pmi[j]) for j in top}
+        top = candidates[np.argsort(-score[candidates], kind="stable")[:size]]
+        return {self.vocab[j]: float(score[j]) for j in top}
 
     def top_words(self, k: int = 20) -> List[Tuple[str, int]]:
         order = np.argsort(-self.df, kind="stable")[:k]

@@ -215,19 +215,25 @@ def attributional_generality(
     size: int = 50,
     min_df: int = 5,
     normalize: str = "pairs",
+    weighting: str = "count",
+    exclude: Iterable[str] = (),
     cache: Optional[Dict[str, Dict[str, float]]] = None,
 ) -> GeneralityScore:
     """Compare the distributional profiles of two words with AISs.
 
-    Each word is represented by its ``size`` strongest context words (PPMI
-    weights). The score follows the sentence rule: with ``x`` as "T" and ``y``
-    as "H", ``entails`` means that ``y`` is the more general word.
+    Each word is represented by its ``size`` main context words (see
+    :meth:`CooccurrenceIndex.context_vector` for ``weighting``; pass the stop
+    words in ``exclude``). The score follows the sentence rule: with ``x`` as
+    "T" and ``y`` as "H", ``entails`` means that ``y`` is the more general
+    word. ``cache`` is keyed by word only, so do not share one cache between
+    different settings.
     """
     cache = {} if cache is None else cache
+    exclude = frozenset(exclude)
 
     def profile(w: str) -> Dict[str, float]:
         if w not in cache:
-            cache[w] = index.context_vector(w, size=size, min_df=min_df)
+            cache[w] = index.context_vector(w, size=size, min_df=min_df, exclude=exclude, weighting=weighting)
         return cache[w]
 
     cx = {k: v for k, v in profile(x).items() if k not in (x, y)}

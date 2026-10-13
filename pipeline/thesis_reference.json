@@ -1,0 +1,8 @@
+{
+  "_source": "Pais, Dias & Moraliyski (2014), Recognize the generality relation between sentences using asymmetric association measures, CLIB 2014, Table 1 (arithmetic mean accuracy over the test sets of RTE-1 to RTE-5, Web hit counts). The same values appear in Chapter 5 of the thesis.",
+  "e1_accuracy_average": {
+    "all_words":    {"added_value": 0.54, "braun_blanquet": 0.55, "certainty_factor": 0.53, "conditional_probability": 0.53, "conviction": 0.52, "gini_index": 0.54, "j_measure": 0.53, "laplace": 0.53},
+    "no_stopwords": {"added_value": 0.52, "braun_blanquet": 0.53, "certainty_factor": 0.53, "conditional_probability": 0.53, "conviction": 0.51, "gini_index": 0.51, "j_measure": 0.51, "laplace": 0.53},
+    "mwu":          {"added_value": 0.53, "braun_blanquet": 0.54, "certainty_factor": 0.53, "conditional_probability": 0.53, "conviction": 0.51, "gini_index": 0.53, "j_measure": 0.52, "laplace": 0.53}
+  }
+}

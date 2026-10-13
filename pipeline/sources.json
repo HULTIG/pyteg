@@ -1,0 +1,14 @@
+{
+  "_comment": "Every archive is fetched from the nltk_data repository at a fixed commit, so the bytes never change. The sha256 values are checked after download.",
+  "base_url": "https://raw.githubusercontent.com/nltk/nltk_data/550b6625bcef1f2abff2ff770a5a0d272c9c6b2a/packages/corpora/",
+  "archives": {
+    "rte":        {"sha256": "2f806ead4d53171601254747c3b7c97d758e63a6ef54e3c010a6d62885ab214a", "use": "RTE-1, RTE-2 and RTE-3 development and test sets (PASCAL)"},
+    "brown":      {"sha256": "9b275f9b3b95d7bd66ccfb7cd259f445a13bbe5d1f4107aba09fd3e8364bafa6", "use": "English counts corpus"},
+    "reuters":    {"sha256": "9a59a43823f02a6e2777075c989a3dc454e4b6f68e0332ee3c0e8264075b62f5", "use": "English counts corpus"},
+    "gutenberg":  {"sha256": "2d3c3ab548c653944310f37f536443ec85d0a0ad855fcae217a0c9efdce2d611", "use": "English counts corpus"},
+    "mac_morpho": {"sha256": "1c6138beba28b9c71edfd4b54991c5e1cf36a4d6b0ad8c66f8aa27c57b07547b", "use": "Portuguese counts corpus (Brazilian newspaper text)"},
+    "floresta":   {"sha256": "7675017f8b36cb85013b7a4171659fb55c427110e1e2fd4bcd92c4c771a14bfd", "use": "Portuguese counts corpus (CETEMPublico and CETENFolha sentences)"},
+    "wordnet":    {"sha256": "cbda5ea6eef7f36a97a43d4a75f85e07fccbb4f23657d27b4ccbc93e2646ab59", "use": "Princeton WordNet 3.0, source of the hypernym pairs"},
+    "omw-1.4":    {"sha256": "3b941e664852f3297b6040236626065796a2aaf7d7f9eec8779a3beaa1096c2d", "use": "Open Multilingual Wordnet 1.4 (OpenWN-PT lemmas for Portuguese)"}
+  }
+}

@@ -46,7 +46,7 @@ def test_vocabulary_restriction(random_docs):
 
 
 def test_context_vector_ppmi(fruit_index):
-    ctx = fruit_index.context_vector("strawberry", size=10, min_df=1)
+    ctx = fruit_index.context_vector("strawberry", size=10, min_df=1, weighting="ppmi")
     # strawberry co-occurs with i, ate, some, fruit, today; 'today' is in every document (PMI 0).
     assert "today" not in ctx
     n, n_s = 100, 10
@@ -64,3 +64,16 @@ def test_from_corpus_file_with_mwus(tmp_path):
     assert idx.freq("new_york") == 2
     assert idx.freq("york") == 1
     assert idx.meta["mwu"] is True
+
+
+def test_context_vector_counts(fruit_index):
+    ctx = fruit_index.context_vector("strawberry", size=3, min_df=1, exclude={"i"})
+    # every strawberry document holds i, ate, some, fruit and today; 'i' is excluded
+    assert len(ctx) == 3 and "i" not in ctx
+    assert all(v == 1.0 for v in ctx.values())
+    try:
+        fruit_index.context_vector("strawberry", weighting="tfidf")
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("unknown weighting should fail")
