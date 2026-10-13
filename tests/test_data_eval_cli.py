@@ -72,3 +72,8 @@ def test_cli_end_to_end(tmp_path, capsys):
     assert "T entails H by generality" in out
     units = tmp_path / "mwu.txt"
     assert main(["mwu", "--corpus", str(corpus), "--out", str(units), "--min-freq", "3"]) == 0
+
+
+def test_cli_mwu_level_needs_units(tmp_path):
+    with pytest.raises(SystemExit):
+        main(["score", "--index", "x.npz", "--t", "a", "--h", "b", "--level", "mwu"])

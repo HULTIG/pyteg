@@ -112,6 +112,19 @@ def read_wikipedia(lang: str, max_articles: int) -> Iterator[Tuple[str, str]]:
 # ---------------------------------------------------------------------------
 
 
+def nltk_documents(lang: str, parts: dict) -> Iterator[Tuple[str, str]]:
+    """Chain the NLTK readers of one language, counting documents per part."""
+    for name, reader in NLTK_SOURCES[lang]:
+        root = RAW / name
+        if not root.exists():
+            raise SystemExit(f"{root} not found; run step1_download.py first")
+        count = 0
+        for item in reader(root):
+            count += 1
+            yield item
+        parts[name] = count
+
+
 def windows(tokens: List[str], size: int, min_size: int) -> Iterator[List[str]]:
     for start in range(0, len(tokens), size):
         chunk = tokens[start : start + size]
@@ -146,20 +159,8 @@ def main() -> int:
         out = CORPUS / f"{lang}.txt"
         with Timer(f"corpus {lang}"):
             if args.source == "nltk":
-                parts = {}
-
-                def chained():
-                    for name, reader in NLTK_SOURCES[lang]:
-                        root = RAW / name
-                        if not root.exists():
-                            raise SystemExit(f"{root} not found; run step1_download.py first")
-                        count = 0
-                        for item in reader(root):
-                            count += 1
-                            yield item
-                        parts[name] = count
-
-                info = write_corpus(chained(), out, args.window, args.min_window)
+                parts: dict = {}
+                info = write_corpus(nltk_documents(lang, parts), out, args.window, args.min_window)
                 info["parts"] = parts
             else:
                 info = write_corpus(read_wikipedia(lang, args.max_articles), out, args.window, args.min_window)

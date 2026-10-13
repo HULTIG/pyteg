@@ -158,9 +158,9 @@ def braun_blanquet(t: Contingency) -> np.ndarray:
 
     With exact document counts ``f(x, y) + f(not x, y)`` is simply ``f(y)``,
     so this formula gives the same value as :func:`conditional_probability`.
-    The two only differ in the thesis because Web hit counts are estimates
-    that do not add up. We keep the published definition on purpose and
-    report the coincidence in the documentation.
+    The thesis reports different results for the two, probably because the
+    Web hit counts it used were estimates that do not add up (see
+    docs/method.md). We keep the published definition on purpose.
     """
     return _div(t.a, t.a + t.c)
 

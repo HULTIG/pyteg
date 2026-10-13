@@ -69,3 +69,29 @@ def test_build_hypernym_pairs(tmp_path):
     assert ("berry", "strawberry") in pairs
     assert ("fruit", "entity") not in pairs  # they never co-occur
     assert counts["sampled"] == len(items)
+
+
+def test_write_corpus(tmp_path):
+    docs = [("a", "One two three four five six."), ("b", "Seven eight")]
+    info = step2.write_corpus(iter(docs), tmp_path / "c.txt", size=4, min_size=2)
+    assert (tmp_path / "c.txt").read_text(encoding="utf-8").splitlines() == [
+        "one two three four",
+        "five six",
+        "seven eight",
+    ]
+    assert info == {"source_documents": 2, "windows": 3, "tokens": 8}
+
+
+def test_read_wikipedia_uses_the_pinned_snapshot(monkeypatch):
+    import types
+
+    calls = {}
+
+    def fake_load_dataset(name, config, split, streaming):
+        calls.update(name=name, config=config, split=split, streaming=streaming)
+        return iter([{"id": "1", "text": "Lisboa é a capital."}, {"id": "2", "text": "Segundo."}, {"id": "3", "text": "x"}])
+
+    monkeypatch.setitem(sys.modules, "datasets", types.SimpleNamespace(load_dataset=fake_load_dataset))
+    docs = list(step2.read_wikipedia("pt", max_articles=2))
+    assert docs == [("wikipedia/1", "Lisboa é a capital."), ("wikipedia/2", "Segundo.")]
+    assert calls == {"name": "wikimedia/wikipedia", "config": "20231101.pt", "split": "train", "streaming": True}

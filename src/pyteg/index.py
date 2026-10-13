@@ -26,7 +26,7 @@ from .text import tokenize
 
 __all__ = ["CooccurrenceIndex"]
 
-_FORMAT_VERSION = 1
+_FORMAT_VERSION = 2
 
 
 class CooccurrenceIndex:
@@ -140,7 +140,7 @@ class CooccurrenceIndex:
     # ------------------------------------------------------------------
     def save(self, path: Union[str, Path]) -> None:
         """Save to a compressed ``.npz`` file (no pickling involved)."""
-        vocab_blob = np.frombuffer("\n".join(self.vocab).encode("utf-8"), dtype=np.uint8)
+        vocab_blob = np.frombuffer(json.dumps(self.vocab, ensure_ascii=False).encode("utf-8"), dtype=np.uint8)
         meta_blob = np.frombuffer(
             json.dumps(dict(self.meta, format_version=_FORMAT_VERSION)).encode("utf-8"), dtype=np.uint8
         )
@@ -161,7 +161,10 @@ class CooccurrenceIndex:
             shape = tuple(int(x) for x in data["shape"])
             vocab_text = data["vocab"].tobytes().decode("utf-8")
             meta = json.loads(data["meta"].tobytes().decode("utf-8"))
-        vocab = vocab_text.split("\n") if vocab_text else []
+        if meta.get("format_version", 1) >= 2:
+            vocab = json.loads(vocab_text)
+        else:  # version 1 stored one word per line
+            vocab = vocab_text.split("\n") if vocab_text else []
         matrix = sparse.csr_matrix((np.ones(len(indices), dtype=np.int32), indices, indptr), shape=shape)
         return cls(vocab, matrix, meta)
 

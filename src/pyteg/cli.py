@@ -98,7 +98,10 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv: Optional[List[str]] = None) -> int:
-    args = build_parser().parse_args(argv)
+    parser = build_parser()
+    args = parser.parse_args(argv)
+    if args.command == "score" and args.level == "mwu" and not args.mwu:
+        parser.error("--level mwu needs --mwu with the multiword units used to build the index")
     return args.func(args)
 
 

@@ -130,17 +130,21 @@ decision. Each one is fixed in the code and covered by a test.
 2. **Braun-Blanquet equals the conditional probability.** As published,
    BB(x‖y) = f(x,y) / (f(x,y) + f(¬x,y)). With exact counts the denominator
    is f(y), so BB and P give identical values and identical decisions. The
-   thesis reports different results for the two, which can only come from Web
-   estimates that do not add up (a query for "y −x" is not answered with
-   hits(y) − hits(x,y)). We keep the published formula and say so, rather
-   than invent a different one. `tests/test_measures.py` checks the identity.
+   thesis reports different results for the two. The papers do not say how
+   f(¬x,y) was obtained; our guess is that it came from a separate Web query,
+   whose estimate need not add up with hits(x,y) to hits(y), but the original
+   code may also have used a slightly different formula. We keep the published
+   one and say so, rather than invent another. `tests/test_measures.py`
+   checks the identity.
 
 3. **Conviction points the other way.** As published, CO(x‖y) is large when
    *x* implies *y*, that is, when *y* is the general word. Every other measure
    has the opposite orientation, so the decision rule applied to CO picks the
-   opposite direction. We keep CO as published and add CO', the same measure
-   with the orientation of the others. A pseudo-count of 0.5 keeps both
-   finite when the denominator would be zero.
+   opposite direction. The thesis reports Conviction among the best measures
+   on its own corpus, so the original code may well have used the other
+   orientation. We keep CO as published and add CO', the same measure with
+   the orientation of the others, so that both readings can be checked. A
+   pseudo-count of 0.5 keeps both finite when the denominator would be zero.
 
 4. **Gini index.** The text extracted from the 2020 article shows a ratio,
    which looks like a typesetting accident. We use the sum form of the CLIB

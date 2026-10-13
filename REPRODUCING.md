@@ -176,8 +176,10 @@ python pipeline/run_all.py --from-step 3
 
 This streams the `20231101` snapshot of `wikimedia/wikipedia` from the Hugging
 Face Hub, in English and in Portuguese. It needs network access to the Hub and
-takes much longer. The reference results do not use this option; if you report
-numbers from it, say so and give the value of `--max-articles`.
+takes much longer. The reference results do not use this option, and this
+path was not run for the 0.1.0 release (the tests only cover it with a
+mocked dataset), so treat it as a starting point. If you report numbers from
+it, say so and give the value of `--max-articles`.
 
 ## Starting over
 

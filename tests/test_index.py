@@ -77,3 +77,19 @@ def test_context_vector_counts(fruit_index):
         pass
     else:
         raise AssertionError("unknown weighting should fail")
+
+
+def test_any_token_survives_save_and_load(tmp_path):
+    docs = [["line\nbreak", "tab\tword", "ação", ""], ["ação"]]
+    idx = CooccurrenceIndex.build(docs)
+    idx.save(tmp_path / "odd.npz")
+    again = CooccurrenceIndex.load(tmp_path / "odd.npz")
+    assert again.vocab == idx.vocab
+    assert again.freq("ação") == 2 and again.freq("line\nbreak") == 1
+
+
+def test_empty_corpus(tmp_path):
+    idx = CooccurrenceIndex.build([])
+    assert idx.n_docs == 0 and len(idx) == 0
+    idx.save(tmp_path / "empty.npz")
+    assert len(CooccurrenceIndex.load(tmp_path / "empty.npz")) == 0

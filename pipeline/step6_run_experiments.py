@@ -30,7 +30,6 @@ import argparse
 import csv
 import gzip
 import json
-import math
 import platform
 import subprocess
 import sys
@@ -197,7 +196,8 @@ def e3(context_size: int, normalize: str) -> Tuple[List[dict], List[dict]]:
     for lang in ("en", "pt"):
         index = CooccurrenceIndex.load(index_path(lang, "all_words"))
         stop = load_stopwords(lang)
-        items = [json.loads(line) for line in open(BENCH / f"hyper_{lang}.jsonl", encoding="utf-8")]
+        with open(BENCH / f"hyper_{lang}.jsonl", encoding="utf-8") as handle:
+            items = [json.loads(line) for line in handle]
         caches: Dict[str, Dict[str, Dict[str, float]]] = {w: {} for w in PROFILES}
         margins: Dict[str, List[float]] = {"baseline_frequency": []}
         with Timer(f"hypernyms {lang}"):

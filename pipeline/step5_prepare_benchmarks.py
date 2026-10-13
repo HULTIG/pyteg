@@ -23,6 +23,7 @@ data/bench/hyper_en.jsonl, data/bench/hyper_pt.jsonl
 from __future__ import annotations
 
 import argparse
+import json
 import random
 import sys
 from collections import defaultdict
@@ -180,8 +181,6 @@ def main() -> int:
                 lemmas, hypernyms, index, set(load_stopwords(lang)), args.min_df, args.pairs, args.seed
             )
             out = BENCH / f"hyper_{lang}.jsonl"
-            import json
-
             with open(out, "w", encoding="utf-8") as handle:
                 for item in items:
                     handle.write(json.dumps(item, ensure_ascii=False) + "\n")

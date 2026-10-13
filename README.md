@@ -6,8 +6,9 @@ pyteg is a Python implementation of the method proposed in Sebastião Pais's
 PhD thesis (Mines ParisTech and Universidade da Beira Interior, 2013). It
 decides whether a text entails a hypothesis *because the hypothesis is more
 general*, the way "I ate a strawberry" entails "I ate fruit" but not the other
-way round. The method needs no training data, no linguistic resources and no
-threshold: only word co-occurrence counts.
+way round. The method needs no training data, no parser or lexicon and no
+threshold: word co-occurrence counts and, optionally, a stop-word list are
+enough.
 
 The original experiments relied on Web search hit counts, which can no longer
 be obtained. This package replaces them with counts over a fixed corpus and
