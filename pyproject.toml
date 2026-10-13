@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=68", "wheel"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -8,7 +8,8 @@ version = "0.1.0"
 description = "Textual entailment by generality with asymmetric InfoSimba (a reproducible implementation of Pais, 2013)"
 readme = "README.md"
 requires-python = ">=3.9"
-license = { file = "LICENSE" }
+license = "MIT AND BSD-3-Clause"
+license-files = ["LICENSE", "src/pyteg/resources/STOPWORDS_LICENSE"]
 authors = [{ name = "Sebastião Pais", email = "sebastiaopais@gmail.com" }]
 keywords = [
     "textual entailment",
@@ -22,7 +23,6 @@ keywords = [
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
     "Topic :: Text Processing :: Linguistic",
