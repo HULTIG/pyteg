@@ -7,10 +7,10 @@
   "normalize": "pairs",
   "context_size": 50,
   "pyteg_version": "0.1.0",
-  "git_commit": "ec66453b317b151aac9b06db98a0460e8d6bef03",
+  "git_commit": "d53c38abae9e0ab91e00212c221efb89e02e58bf",
   "python": "3.13.16",
   "numpy": "2.5.4",
   "platform": "Linux-6.18.44-fc-v114-x86_64-with-glibc2.39",
-  "finished": "2026-10-13 09:45 UTC",
-  "seconds": 297.8
+  "finished": "2026-10-13 10:00 UTC",
+  "seconds": 302.2
 }

@@ -1,7 +1,7 @@
 # What the reference run shows
 
 These notes discuss the numbers in [`results/REPORT.md`](../results/REPORT.md),
-produced by `python pipeline/run_all.py` at commit `ec66453`. The counts come
+produced by `python pipeline/run_all.py` at commit `d53c38a`. The counts come
 from about 4.6 million English tokens (Brown, Reuters-21578, Gutenberg) and
 1.2 million Portuguese tokens (Mac-Morpho, Floresta), cut into windows of 100
 tokens. That is a small corpus next to the Web, and every conclusion below
